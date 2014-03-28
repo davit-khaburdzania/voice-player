@@ -37,4 +37,4 @@ exports.youtube = function (req, res) {
     items = items.slice(0, 5);
     res.json(items);
   });
-}
+};
