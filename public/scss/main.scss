@@ -1,8 +1,6 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
+// Vendor Dependencies
+@import "vendor/normalize";
 
-a {
-  color: #00B7FF;
-}
+// core styles
+@import "variables";
+@import "all";
