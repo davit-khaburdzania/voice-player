@@ -8,7 +8,8 @@
   "dependencies": {
     "express": "3.5.0",
     "jade": "*",
-    "grunt-contrib-sass": "~0.7.3"
+    "grunt-contrib-sass": "~0.7.3",
+    "youtube-feeds": "~2.2.1"
   },
   "devDependencies": {
     "grunt": "~0.4.2",
