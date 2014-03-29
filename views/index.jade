@@ -1,3 +1,20 @@
 extends layout
 
 block content
+  .container
+    .music-player
+      .upper-wrapper.cf
+        img.song-thumb(src="http://img.studentlive.in/2012/07/ColdplayHollywodBowl.jpg", alt="Song Thumbnail")
+      .bottom-wrapper.cf
+        .song-details-panel
+          p.artist Coldplay
+          p.song-title Twisted Logic
+        .song-controller.center
+          p.glyphicon.glyphicon-backward
+          p.glyphicon.glyphicon-play
+          p.glyphicon.glyphicon-forward
+          .meter
+            span(style="width: 15%")
+
+
+
