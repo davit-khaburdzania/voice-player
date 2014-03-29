@@ -1,61 +1,76 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-module.exports = Commander = function () {
-
-};
-
-Commander.prototype.interpret = function (str) {
-  console.log(str);
-};
-
-},{}],2:[function(require,module,exports){
 $ = require('../vendor/jquery-2.1.0.min');
 
 $(function () {
-  var Speech = require('./speech');
-      Commander = require('./commander');
+  var Speech = require('./speech'),
+      Player = require('./player');
 
-  commander = new Commander();
-  speech = new Speech();
+  player = new Player();
+  speech = new Speech(player);
 
-  speech.onresult = commander.interpret;
-  speech.onend = function () {
-    console.log('end');
-  };
-  
   speech.start();
 });
 
-},{"../vendor/jquery-2.1.0.min":4,"./commander":1,"./speech":3}],3:[function(require,module,exports){
-module.exports = Speech = function (opt) {
-  opt = opt || {};
-  
-  this.lang = opt.lang || 'en-US';
-  this.continuous = opt.continuous || true;
-  this.interimResults = opt.interimResults || true;
+},{"../vendor/jquery-2.1.0.min":4,"./player":2,"./speech":3}],2:[function(require,module,exports){
+module.exports = Player = function () {
 
-  this.onresult = opt.onresult;
-  this.onend = opt.onend;
+};
+
+Player.prototype.play = function (track) {
+  console.log('playing ' + track + ' ...');
+};
+
+Player.prototype.resume = function (track) {
+  console.log('resumed track');
+};
+
+Player.prototype.stop = function () {
+  console.log('stoped track');
+};
+
+},{}],3:[function(require,module,exports){
+module.exports = Speech = function (player) {
+  this.rec = new webkitSpeechRecognition();
+  this.player = player;
+
+  this.rec.lang = 'en-US';
+  this.rec.continuous = true;
+  this.rec.interimResults = true;
 };
 
 Speech.prototype.start = function () {
-  var rec = new webkitSpeechRecognition(),
-      self = this;
-
-  rec.lang = self.lang;
-  rec.continuous = self.continuous;
-  rec.interimResults = self.interimResults;
-  
-  rec.start();
-
-  rec.onresult = function(event) {
-    for (var i = event.resultIndex; i < event.results.length; ++i) {
-      if (event.results[i].isFinal && self.onresult)
-        self.onresult(event.results[i][0].transcript);
-    }
-  };
-
-  rec.onend = self.onend;
+  this.rec.onresult = this.onresult.bind(this);
+  this.rec.onend = this.onend.bind(this);
+  this.rec.start();
 };
+
+Speech.prototype.onresult = function(event) {
+  for (var i = event.resultIndex; i < event.results.length; ++i) {
+    if (event.results[i].isFinal)
+      this.interpret(event.results[i][0].transcript);
+  }
+};
+
+Speech.prototype.onend = function () {
+  console.log('end');
+};
+
+Speech.prototype.interpret = function (str) {
+  str = str.trim();
+
+  if (str.match(/^play.+/)) {
+    str = str.replace(/play/g, '').trim();
+    return this.player.play(str);
+  }
+
+  if (str.match(/^play$/)) {
+    return this.player.resume();
+  }
+
+  if (str.match(/^stop$/)) {
+    return this.player.stop();
+  }
+}; 
 
 },{}],4:[function(require,module,exports){
 /*! jQuery v2.1.0 | (c) 2005, 2014 jQuery Foundation, Inc. | jquery.org/license */
