@@ -7,9 +7,13 @@ exports.index = function(req, res){
 
 exports.youtube = function (req, res) {
   var youtube = require('youtube-feeds'),
-      q = req.query.q, items;
+      q = req.query.q, 
+      options = {
+        'q': q,
+        'max-results': 5
+      }, items;
 
-  youtube.feeds.videos({ q: q }, function (error, data) {
+  youtube.feeds.videos(options, function (error, data) {
     if (error) {
       res.statusCode = 500;
       return res.json({ message: 'error from youtube api: ' + error });
@@ -34,7 +38,6 @@ exports.youtube = function (req, res) {
       };
     });
 
-    items = items.slice(0, 5);
     res.json(items);
   });
 };

@@ -46,10 +46,19 @@ module.exports = function (grunt) {
         }
       }
     },
+
+    browserify: {
+      dist: {
+        files: {
+          'public/js/bundle.js': ['public/js/app/*.js'],
+        }
+      }
+    },
+
     watch: {
       sass: {
-        files: 'public/scss/*.scss',
-        tasks: 'sass'
+        files: ['public/scss/*.scss', 'public/js/app/*.js'],
+        tasks: ['sass', 'browserify']
       }
     }
   });
@@ -57,6 +66,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-browserify');
 };
 
 
