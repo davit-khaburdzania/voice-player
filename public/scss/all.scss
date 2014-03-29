@@ -10,9 +10,10 @@
 
   .upper-wrapper {
     background-color: #2c3e50;
-    height: 46%;
+    height: 48%;
     overflow: hidden;
     position: relative;
+    -webkit-filter: blur(6px) sepia(0.5) saturate(1.4);
     img.song-thumb {
       width: 100%;
     }
@@ -20,12 +21,12 @@
 
   .bottom-wrapper {
     background-color: #FFF;
-    height: 54%;
+    height: 52%;
     p {
       padding: 24px 20px 0 30px;
       margin: 0;
       &.artist {
-        font-size: 22px;
+        font-size: 24px;
       }
       &.song-title {
         padding-top: 0;

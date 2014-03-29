@@ -952,19 +952,20 @@ body {
   overflow: hidden; }
   .music-player .upper-wrapper {
     background-color: #2c3e50;
-    height: 46%;
+    height: 48%;
     overflow: hidden;
-    position: relative; }
+    position: relative;
+    -webkit-filter: blur(6px) sepia(0.5) saturate(1.4); }
     .music-player .upper-wrapper img.song-thumb {
       width: 100%; }
   .music-player .bottom-wrapper {
     background-color: #FFF;
-    height: 54%; }
+    height: 52%; }
     .music-player .bottom-wrapper p {
       padding: 24px 20px 0 30px;
       margin: 0; }
       .music-player .bottom-wrapper p.artist {
-        font-size: 22px; }
+        font-size: 24px; }
       .music-player .bottom-wrapper p.song-title {
         padding-top: 0;
         font-size: 14px;
