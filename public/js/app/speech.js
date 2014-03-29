@@ -15,8 +15,7 @@ Speech.prototype.start = function () {
 
 Speech.prototype.onresult = function(event) {
   for (var i = event.resultIndex; i < event.results.length; ++i) {
-    if (event.results[i].isFinal)
-      this.interpret(event.results[i][0].transcript);
+    this.interpret(event.results[i][0].transcript);
   }
 };
 
@@ -26,7 +25,6 @@ Speech.prototype.onend = function () {
 
 Speech.prototype.interpret = function (str) {
   str = str.trim();
-
   if (str.match(/^play.+/)) {
     str = str.replace(/play/g, '').trim();
     return this.player.play(str);
@@ -36,7 +34,7 @@ Speech.prototype.interpret = function (str) {
     return this.player.resume();
   }
 
-  if (str.match(/^stop$/)) {
+  if (str.match(/^stop$|^top$|^sup$|^stock$|^stuff$/)) {
     return this.player.stop();
   }
 }; 
