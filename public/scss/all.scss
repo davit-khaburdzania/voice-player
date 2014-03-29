@@ -13,9 +13,20 @@
     height: 48%;
     overflow: hidden;
     position: relative;
-    -webkit-filter: blur(6px) sepia(0.5) saturate(1.4);
     img.song-thumb {
       width: 100%;
+      -webkit-filter: blur(65px);
+    }
+    .time-tracker {
+      position: absolute;
+      top: 0;
+      font-size: 141px;
+      z-index: 1;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      margin: auto;
+      color: #bdc3c7;
     }
   }
 
@@ -69,7 +80,3 @@
       }
   }
 }
-
-
-
-
