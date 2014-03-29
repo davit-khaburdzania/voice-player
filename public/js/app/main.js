@@ -1,8 +1,16 @@
 $ = require('../vendor/jquery-2.1.0.min');
 
 $(function () {
-  var speech = require('./speech');
-  speech.start(function (result) {
-    console.log(result);
-  });
+  var Speech = require('./speech');
+      Commander = require('./commander');
+
+  commander = new Commander();
+  speech = new Speech();
+
+  speech.onresult = commander.interpret;
+  speech.onend = function () {
+    console.log('end');
+  };
+  
+  speech.start();
 });

@@ -1,23 +1,30 @@
-module.exports = {
-  start: function (done) {
-    var rec = new webkitSpeechRecognition();
-    
-    rec.lang = 'en-US';
-    rec.continuous = true;
-    rec.interimResults = true;
-    rec.start();
+module.exports = Speech = function (opt) {
+  opt = opt || {};
+  
+  this.lang = opt.lang || 'en-US';
+  this.continuous = opt.continuous || true;
+  this.interimResults = opt.interimResults || true;
 
-    rec.onresult = function(event) {
-      for (var i = event.resultIndex; i < event.results.length; ++i) {
-        if (event.results[i].isFinal)
-          done(event.results[i][0].transcript);
-      }
-    };
+  this.onresult = opt.onresult;
+  this.onend = opt.onend;
+};
 
-    rec.onend = function () {
-      console.log('end');
-      rec.stop();
-      rec.start();
-    };
-  }
-}
+Speech.prototype.start = function () {
+  var rec = new webkitSpeechRecognition(),
+      self = this;
+
+  rec.lang = self.lang;
+  rec.continuous = self.continuous;
+  rec.interimResults = self.interimResults;
+  
+  rec.start();
+
+  rec.onresult = function(event) {
+    for (var i = event.resultIndex; i < event.results.length; ++i) {
+      if (event.results[i].isFinal && self.onresult)
+        self.onresult(event.results[i][0].transcript);
+    }
+  };
+
+  rec.onend = self.onend;
+};
