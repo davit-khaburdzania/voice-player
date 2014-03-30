@@ -3,17 +3,18 @@ extends layout
 block content
   .container
     .music-player
-      .upper-wrapper.cf
-        .time-tracker.center 01:45
-        img.song-thumb(src="http://lorempixel.com/400/400", alt="Song Thumbnail")
-      .bottom-wrapper.cf
-        .song-details-panel
-          p.title Search Track
-        .song-controller.center
-          p.glyphicon.glyphicon-backward
-          p.glyphicon.glyphicon-play
-          p.glyphicon.glyphicon-forward
-          .meter
-            span(style="width: 15%")
+      .upper-controller
+        img.song-thumb(src="http://lorempixel.com/400/400", alt="song thumb")
+        .song-details
+          p.song-artist Coldplay
+          p.song-title  The message
+        .song-timetracker 1.45
+        .meter
+          span(style="width: 55%")
+      .bottom-controller
+        span.glyphicon.glyphicon-step-backward
+        span.glyphicon.glyphicon-play
+        span.glyphicon.glyphicon-pause.hidden
+        span.glyphicon.glyphicon-step-forward
 
     #player(style="display:none")

@@ -8,4 +8,5 @@ $(function () {
   speech = new Speech(player);
 
   speech.start();
+
 });
