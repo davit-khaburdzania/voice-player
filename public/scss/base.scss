@@ -14,7 +14,7 @@ body {
   width: 90%;
   height: 100%;
   max-width: 1000px;
-  background: #e3e3e3;
+  background-color: #e3e3e3;
   margin: 0 auto;
   padding-top: 7.5%;
 }
@@ -30,6 +30,10 @@ body {
 .center {
   margin: 0 auto;
   text-align: center;
+}
+
+.hidden {
+  display: none;
 }
 
 /**
